@@ -3,6 +3,6 @@
 ### Materia:  Redes I
 ### Gestion: 2024-2
 ## Integrantes
-- Alvarez Aduviri Maycol Alexander
-- Vilca Mamani Maria Belen
+- Alvarez Maycol
+- Villca Maria
 - Clavijo Andrea
