@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea3</title>
+    <style>
+        body {
+            font-family: {{ font_type }};
+            color: {{ font_color }};
+        }
+    </style>
+</head>
+<body>
+    <h1>Elige tus preferencias de estilo</h1>
+
+    <form action="/set_preferences" method="POST">
+        <label for="font_type">Tipo de letra:</label>
+        <select name="font_type" id="font_type">
+            <option value="Arial" {% if font_type == 'Arial' %}selected{% endif %}>Arial</option>
+            <option value="Times New Roman" {% if font_type == 'Times New Roman' %}selected{% endif %}>Times New Roman</option>
+            <option value="Courier New" {% if font_type == 'Courier New' %}selected{% endif %}>Courier New</option>
+            <option value="Verdana" {% if font_type == 'Verdana' %}selected{% endif %}>Verdana</option>
+        </select>
+        <br><br>
+
+        <label for="font_color">Color de la fuente:</label>
+        <input type="color" name="font_color" id="font_color" value="{{ font_color }}">
+        <br><br>
+
+        <button type="submit">Guardar estilo</button>
+    </form>
+
+    <h2>Enlaces visitados:</h2>
+    <ul>
+        <li><a href="{{ url_for('visit_link', link='https://google.com') }}" target="_blank">Google</a></li>
+        <li><a href="{{ url_for('visit_link', link='https://github.com') }}" target="_blank">GitHub</a></li>
+        <li><a href="{{ url_for('visit_link', link='https://stackoverflow.com') }}" target="_blank">StackOverflow</a></li>
+       
+    </ul>
+
+    <h2>Has visitado anteriormente:</h2>
+    <ul>
+        {% for link in visited_links %}
+            {% if link %}
+                <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>
