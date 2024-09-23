@@ -24,8 +24,8 @@ def set_preferences():
     # Crear una respuesta y establecer cookies
     response = make_response(redirect(url_for('index')))
     # Seteando las cookies para que nunca caduque seguna documentacion de flask
-    response.set_cookie('font_type', font_type)  # Cookie con tiempo ilimitado
-    response.set_cookie('font_color', font_color)
+    response.set_cookie('font_type', font_type, max_age=60)  # Cookie con tiempo 60 segundos
+    response.set_cookie('font_color', font_color, max_age=60)
 
     return response
 
@@ -43,8 +43,8 @@ def visit_link(link):
     response = make_response(redirect(link))
 
     # Guardar los enlaces visitados actualizados en la cookie
-    response.set_cookie('visited_links', visited_links, max_age=10)#tiempo de vida de la cookie 10 segundos
+    response.set_cookie('visited_links', visited_links)#tiempo de vida de la cookie ilimitado
 
     return response
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=80)
