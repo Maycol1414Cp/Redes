@@ -4,5 +4,5 @@
 ### Gestion: 2024-2
 ## Integrantes
 - Alvarez Maycol
-- Villca Maria
+- Villca Maria Belen
 - Clavijo Andrea
