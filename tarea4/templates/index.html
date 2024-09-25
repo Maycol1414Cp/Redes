@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea4</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        body {
+            font-family: {{ font_type }};
+            color: {{ font_color }};
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Elige tus preferencias de estilo</h1>
+        <!-- cookie cona flask -->
+        <!-- <form action="/set_preferences" method="POST"> -->
+        <!-- cookie con js -->
+        <form onsubmit="savePreferences(); return false;">
+            <label for="font_type">Tipo de letra:</label>
+            <select name="font_type" id="font_type">
+                <option value="Arial" {% if font_type == 'Arial' %}selected{% endif %}>Arial</option>
+                <option value="Times New Roman" {% if font_type == 'Times New Roman' %}selected{% endif %}>Times New Roman</option>
+                <option value="Courier New" {% if font_type == 'Courier New' %}selected{% endif %}>Courier New</option>
+                <option value="Verdana" {% if font_type == 'Verdana' %}selected{% endif %}>Verdana</option>
+            </select>
+            <br><br>
+
+            <label for="font_color">Color de la fuente:</label>
+            <input type="color" name="font_color" id="font_color" value="{{ font_color }}">
+            <br><br>
+
+            <button type="submit">Guardar estilo</button>
+        </form>
+
+        <h2>Enlaces visitados:</h2>
+        <!-- cookie con js -->
+        <ul>
+            <li><a href="https://facebook.com" target="_blank" onclick="trackLinkVisit('https://facebook.com')">Facebook</a></li>
+            <li><a href="https://instagram.com" target="_blank" onclick="trackLinkVisit('https://instagram.com')">Instagram</a></li>
+            <li><a href="https://x.com" target="_blank" onclick="trackLinkVisit('https://x.com')">X (Twitter)</a></li>
+        </ul>
+        <!-- cookie con flask
+        <ul>
+            <li><a href="{{ url_for('visit_link', link='https://facebook.com') }}" target="_blank">Facebook</a></li>
+            <li><a href="{{ url_for('visit_link', link='https://instagram.com') }}" target="_blank">Instagram</a></li>
+            <li><a href="{{ url_for('visit_link', link='https://x.com') }}" target="_blank">X</a></li>
+        </ul>
+         -->
+
+        <h2>Has visitado anteriormente:</h2>
+        <ul>
+            {% for link in visited_links %}
+                {% if link %}
+                    <li><a href="{{ link }}" target="_blank">{{ link }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
